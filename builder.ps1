@@ -10,7 +10,7 @@ $exePath = Join-Path $currentDir $exeName
 $icoPath = Join-Path $currentDir "app_icon.ico"
 
 Write-Host "==================================================" -ForegroundColor Cyan
-Write-Host "   MOUSE BUTTON REMAPPER PRO - BUILD UTILITY" -ForegroundColor Cyan
+Write-Host "   MOUSE BUTTON REMAPPER MINI - BUILD UTILITY" -ForegroundColor Cyan
 Write-Host "==================================================" -ForegroundColor Cyan
 
 # Check if source script exists
@@ -76,8 +76,8 @@ try {
         InputFile   = $scriptPath
         OutputFile  = $exePath
         NoConsole   = $true
-        Title       = "Mouse Button Remapper Pro"
-        Product     = "Mouse Button Remapper Pro"
+        Title       = "Mouse Button Remapper Mini"
+        Product     = "Mouse Button Remapper Mini"
         Company     = "OpenSource"
         Copyright   = "MIT"
         Version     = "1.0.0.0"
@@ -107,5 +107,8 @@ catch {
     Write-Host "[ERROR] Compilation failed: $_" -ForegroundColor Red
 }
 
-Write-Host "Press any key to exit..." -ForegroundColor DarkGray
-$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+# Only pause if running interactively on a local machine
+if (-not $env:CI) {
+    Write-Host "Press any key to exit..." -ForegroundColor DarkGray
+    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+}
